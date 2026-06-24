@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarberApp.Views.RegistroAdminPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <Grid>
+        <BoxView Color="{DynamicResource GlowGold}" Opacity="0.5"
+                 HorizontalOptions="End" VerticalOptions="Start"
+                 WidthRequest="180" HeightRequest="180" Margin="0,-40,-40,0"/>
+
+        <Border Style="{StaticResource AuthCard}">
+            <VerticalStackLayout Spacing="14">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                    <Label Text="✦" FontSize="20" TextColor="{DynamicResource AccentGold}"/>
+                    <Label Text="✂" FontSize="36" TextColor="{DynamicResource AccentGold}"/>
+                </HorizontalStackLayout>
+
+                <Label Text="Configura tu cuenta"
+                       TextColor="{DynamicResource TextPrimary}"
+                       FontSize="22" FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+
+                <Label x:Name="LblNombreLocal"
+                       TextColor="{DynamicResource TextSecondary}"
+                       FontSize="13" HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"/>
+
+                <BoxView Style="{StaticResource AppDivider}"/>
+
+                <Border Style="{StaticResource AppInputBorder}">
+                    <Entry x:Name="EntryNombreNegocio"
+                           Placeholder="Nombre de tu barbería o estética"
+                           PlaceholderColor="{DynamicResource TextMuted}"
+                           TextColor="{DynamicResource TextPrimary}"
+                           BackgroundColor="Transparent" FontSize="14"/>
+                </Border>
+
+                <Border Style="{StaticResource AppInputBorder}">
+                    <Entry x:Name="EntryNombre"
+                           Placeholder="Nombre completo del administrador"
+                           PlaceholderColor="{DynamicResource TextMuted}"
+                           TextColor="{DynamicResource TextPrimary}"
+                           BackgroundColor="Transparent" FontSize="14"/>
+                </Border>
+
+                <Border Style="{StaticResource AppInputBorder}">
+                    <Entry x:Name="EntryUsuario"
+                           Placeholder="Usuario (sin espacios)"
+                           PlaceholderColor="{DynamicResource TextMuted}"
+                           TextColor="{DynamicResource TextPrimary}"
+                           BackgroundColor="Transparent" FontSize="14"/>
+                </Border>
+
+                <Border Style="{StaticResource AppInputBorder}">
+                    <Entry x:Name="EntryPassword"
+                           Placeholder="Contraseña"
+                           PlaceholderColor="{DynamicResource TextMuted}"
+                           TextColor="{DynamicResource TextPrimary}"
+                           IsPassword="True"
+                           BackgroundColor="Transparent" FontSize="14"/>
+                </Border>
+
+                <Border Style="{StaticResource AppInputBorder}">
+                    <Entry x:Name="EntryConfirmar"
+                           Placeholder="Confirmar contraseña"
+                           PlaceholderColor="{DynamicResource TextMuted}"
+                           TextColor="{DynamicResource TextPrimary}"
+                           IsPassword="True"
+                           BackgroundColor="Transparent" FontSize="14"/>
+                </Border>
+
+                <Button Text="Crear cuenta" Clicked="OnCrearCuentaClicked"
+                        Style="{StaticResource AppPrimaryButton}" Margin="0,6,0,0"/>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

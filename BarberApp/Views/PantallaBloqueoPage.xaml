@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+
+             x:Class="BarberApp.Views.PantallaBloqueoPage"
+
+             NavigationPage.HasNavigationBar="False"
+
+             BackgroundColor="{DynamicResource PageBackground}">
+
+
+
+    <VerticalStackLayout Padding="30" Spacing="16" VerticalOptions="Center">
+
+        <Label Text="🔴" FontSize="60" HorizontalOptions="Center"/>
+
+        <Label Text="Servicio suspendido"
+
+               TextColor="{DynamicResource TextPrimary}"
+
+               FontSize="24" FontAttributes="Bold"
+
+               HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+
+        <Label Text="Tu licencia ha vencido o está pendiente de renovación. Contacta a soporte o verifica el pago."
+
+               TextColor="{DynamicResource TextSecondary}"
+
+               FontSize="16" HorizontalOptions="Center"
+
+               HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
+
+        <Label x:Name="LblDeviceId"
+
+               TextColor="{DynamicResource TextMuted}" FontSize="11"
+
+               HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+
+        <Button Text="Copiar Device ID" Clicked="OnCopiarIdClicked"
+
+                Style="{StaticResource AppSecondaryButton}" HeightRequest="40"/>
+
+        <Button Text="Verificar pago / renovación" Clicked="OnVerificarPagoClicked"
+
+                BackgroundColor="#E24B4A"
+
+                TextColor="White" CornerRadius="12"
+
+                HeightRequest="50" FontAttributes="Bold" Margin="0,8,0,0"/>
+
+        <ActivityIndicator x:Name="IndicatorCarga"
+
+                           IsRunning="False" IsVisible="False"
+
+                           Color="{DynamicResource AccentGold}"
+
+                           HorizontalOptions="Center"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>
+
+

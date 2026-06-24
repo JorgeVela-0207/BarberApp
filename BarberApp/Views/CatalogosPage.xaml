@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarberApp.Views.CatalogosPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto">
+
+        <Grid Grid.Row="0" Padding="16,14" ColumnDefinitions="Auto,*">
+            <Button Text="← Volver" Clicked="OnVolverClicked" Style="{StaticResource AppBackButton}"/>
+            <Label Grid.Column="1" Text="Catálogos" Style="{StaticResource AppPageTitle}"/>
+        </Grid>
+
+        <Border Grid.Row="1" Margin="16,0,16,8"
+                BackgroundColor="{DynamicResource InputBackground}"
+                Stroke="{DynamicResource CardBorder}" Padding="8,4" StrokeShape="RoundRectangle 10">
+            <SearchBar x:Name="SearchBar" Placeholder="Buscar..."
+                       TextColor="{DynamicResource TextPrimary}"
+                       PlaceholderColor="{DynamicResource TextMuted}"
+                       BackgroundColor="Transparent" TextChanged="OnBuscarTextChanged"/>
+        </Border>
+
+        <HorizontalStackLayout Grid.Row="2" Spacing="8" Padding="16,0,16,12" HorizontalOptions="Center">
+            <Button x:Name="BtnTabServicios" Text="Servicios" Clicked="OnTabServiciosClicked"
+                    CornerRadius="8" Padding="16,8"/>
+            <Button x:Name="BtnTabClientes" Text="Clientes" Clicked="OnTabClientesClicked"
+                    CornerRadius="8" Padding="16,8"/>
+            <Button x:Name="BtnTabBarberos" Text="Personal" Clicked="OnTabBarberosClicked"
+                    CornerRadius="8" Padding="16,8"/>
+            <Button x:Name="BtnTabProductos" Text="Productos" Clicked="OnTabProductosClicked"
+                    CornerRadius="8" Padding="16,8"/>
+        </HorizontalStackLayout>
+
+        <CollectionView x:Name="ListaCatalogo" Grid.Row="3" Margin="16,0"
+                        SelectionMode="Single" SelectionChanged="OnItemSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="{DynamicResource CardBackground}"
+                            Stroke="{DynamicResource CardBorder}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12" Padding="14,12" Margin="0,0,0,8">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding Linea1}" TextColor="{DynamicResource TextPrimary}"
+                                       FontSize="16" FontAttributes="Bold"/>
+                                <Label Text="{Binding Linea2}" TextColor="{DynamicResource TextSecondary}" FontSize="13"/>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="1" Text="›" TextColor="{DynamicResource TextMuted}"
+                                   FontSize="22" VerticalOptions="Center"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Border x:Name="PanelFormulario" Grid.Row="4" IsVisible="False"
+                BackgroundColor="{DynamicResource CardBackground}"
+                Stroke="{DynamicResource CardBorder}" StrokeThickness="1"
+                Padding="16" Margin="16,8" StrokeShape="RoundRectangle 12">
+            <VerticalStackLayout Spacing="10">
+                <Label x:Name="LblFormTitulo" Text="Nuevo registro"
+                       TextColor="{DynamicResource TextPrimary}" FontSize="16" FontAttributes="Bold"/>
+
+                <Entry x:Name="EntryCampo1" PlaceholderColor="{DynamicResource TextMuted}"
+                       TextColor="{DynamicResource TextPrimary}" BackgroundColor="{DynamicResource InputBackground}"/>
+                <Entry x:Name="EntryCampo2" PlaceholderColor="{DynamicResource TextMuted}"
+                       TextColor="{DynamicResource TextPrimary}" BackgroundColor="{DynamicResource InputBackground}"/>
+                <Entry x:Name="EntryCampo3" PlaceholderColor="{DynamicResource TextMuted}"
+                       TextColor="{DynamicResource TextPrimary}" BackgroundColor="{DynamicResource InputBackground}"/>
+                <Entry x:Name="EntryCampo4" PlaceholderColor="{DynamicResource TextMuted}"
+                       TextColor="{DynamicResource TextPrimary}" BackgroundColor="{DynamicResource InputBackground}"/>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,6,0,0">
+                    <Button Text="Guardar" Clicked="OnGuardarClicked"
+                            BackgroundColor="{DynamicResource AccentLavender}"
+                            TextColor="{DynamicResource ButtonOnAccent}" CornerRadius="10"/>
+                    <Button Grid.Column="1" Text="Cancelar" Clicked="OnCancelarFormClicked"
+                            Style="{StaticResource AppSecondaryButton}"/>
+                </Grid>
+                <Button x:Name="BtnEliminar" Text="Eliminar / Desactivar"
+                        Clicked="OnEliminarClicked" IsVisible="False"
+                        BackgroundColor="#3d1a1a" TextColor="#E24B4A"
+                        CornerRadius="10" Margin="0,8,0,0"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Button Grid.Row="5" Text="+ Agregar" Clicked="OnAgregarClicked"
+                Style="{StaticResource AppSecondaryButton}"
+                CornerRadius="12" HeightRequest="48" Margin="16,8,16,16"/>
+    </Grid>
+</ContentPage>

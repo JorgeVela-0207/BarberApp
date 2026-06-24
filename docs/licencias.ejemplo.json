@@ -1,0 +1,12 @@
+[
+  {
+    "id_negocio": "DEMO001",
+    "nombre_local": "Barbería Demo",
+    "dueno": "Nombre del dueño",
+    "dispositivo_id": "PegaAquiElDeviceID16Chars",
+    "token": "DEMO-TOKEN-2026-001",
+    "estado": "ACTIVO",
+    "fecha_activacion": "2026-06-01",
+    "fecha_vencimiento": "2027-06-01"
+  }
+]

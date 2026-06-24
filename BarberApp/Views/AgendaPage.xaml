@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarberApp.Views.AgendaPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto">
+
+        <Grid Grid.Row="0" Padding="16,14" ColumnDefinitions="Auto,*,Auto,Auto">
+            <Button Text="← Volver" Clicked="OnVolverClicked"
+                    BackgroundColor="Transparent" TextColor="{DynamicResource TextSecondary}" FontSize="14" Padding="0"/>
+            <Label Grid.Column="1" Text="Agenda"
+                   TextColor="{DynamicResource TextPrimary}" FontSize="20" FontAttributes="Bold"
+                   HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Button Grid.Column="2" Text="📱" Clicked="OnWhatsAppMasivoClicked"
+                    BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource AccentGreen}"
+                    FontSize="14" Padding="8,4" CornerRadius="8" Margin="0,0,4,0"/>
+            <Button Grid.Column="3" Text="🚫" Clicked="OnBloqueosClicked"
+                    BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource AccentGold}"
+                    FontSize="14" Padding="8,4" CornerRadius="8"/>
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center" Spacing="8" Padding="16,0">
+            <Button x:Name="BtnVistaDia" Text="Día" Clicked="OnVistaDiaClicked"
+                    BackgroundColor="{DynamicResource AccentGold}" TextColor="{DynamicResource ButtonOnAccent}" CornerRadius="8" Padding="16,6"/>
+            <Button x:Name="BtnVistaSemana" Text="Semana" Clicked="OnVistaSemanaClicked"
+                    BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource TextSecondary}"
+                    CornerRadius="8" Padding="16,6"/>
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="2" Padding="16,8,16,8" ColumnDefinitions="Auto,*,Auto">
+            <Button Text="◀" Clicked="OnPeriodoAnteriorClicked"
+                    BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource TextSecondary}"
+                    WidthRequest="44" CornerRadius="8"/>
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="2">
+                <Label x:Name="LblFechaAgenda" TextColor="{DynamicResource TextPrimary}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <DatePicker x:Name="PickerFecha" DateSelected="OnFechaChanged" TextColor="{DynamicResource TextSecondary}"
+                            BackgroundColor="Transparent" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+            <Button Grid.Column="2" Text="▶" Clicked="OnPeriodoSiguienteClicked"
+                    BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource TextSecondary}"
+                    WidthRequest="44" CornerRadius="8"/>
+        </Grid>
+
+        <CollectionView x:Name="ListaCitas" Grid.Row="3" Margin="16,0"
+                        SelectionMode="Single" SelectionChanged="OnCitaSelected">
+            <CollectionView.EmptyView>
+                <Label Text="Sin citas en este periodo" TextColor="{DynamicResource TextMuted}" FontSize="15"
+                       HorizontalOptions="Center" VerticalOptions="Center" Margin="0,40"/>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="{Binding ColorFondo}" Stroke="{Binding ColorBorde}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12" Padding="14,12" Margin="0,0,0,8">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <VerticalStackLayout WidthRequest="60" Spacing="2">
+                                <Label Text="{Binding Hora}" TextColor="{DynamicResource AccentLavender}" FontSize="16" FontAttributes="Bold"/>
+                                <Label Text="{Binding FechaCorta}" TextColor="{DynamicResource TextMuted}" FontSize="9"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="3" Margin="8,0,0,0">
+                                <Label Text="{Binding NombreCliente}" TextColor="{DynamicResource TextPrimary}" FontSize="15" FontAttributes="Bold"/>
+                                <Label Text="{Binding Detalle}" TextColor="{DynamicResource TextSecondary}" FontSize="12"/>
+                            </VerticalStackLayout>
+                            <Border Grid.Column="2" BackgroundColor="{DynamicResource InputBackground}" StrokeThickness="0" Padding="8,4" VerticalOptions="Center">
+                                <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                                <Label Text="{Binding EstadoTexto}" TextColor="{DynamicResource TextSecondary}" FontSize="11"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Border x:Name="PanelCita" Grid.Row="4" IsVisible="False"
+                BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}"
+                Padding="16" Margin="16,8" StrokeShape="RoundRectangle 12">
+            <VerticalStackLayout Spacing="10">
+                <Label x:Name="LblFormCita" Text="Nueva cita" TextColor="{DynamicResource TextPrimary}" FontSize="16" FontAttributes="Bold"/>
+                <Picker x:Name="PickerCliente" Title="Cliente" TextColor="{DynamicResource TextPrimary}"/>
+                <Picker x:Name="PickerBarbero" Title="Barbero/Estilista" TextColor="{DynamicResource TextPrimary}"/>
+                <Picker x:Name="PickerServicio" Title="Servicio" TextColor="{DynamicResource TextPrimary}"/>
+                <Picker x:Name="PickerRecurrencia" Title="Recurrencia" TextColor="{DynamicResource TextPrimary}"/>
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <TimePicker x:Name="PickerHora" TextColor="{DynamicResource TextPrimary}"/>
+                    <Label Grid.Column="1" x:Name="LblMontoPreview" Text="$0" TextColor="{DynamicResource AccentGold}"
+                           FontSize="18" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="End"/>
+                </Grid>
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Button Text="Guardar" Clicked="OnGuardarCitaClicked"
+                            BackgroundColor="{DynamicResource AccentGold}" TextColor="{DynamicResource ButtonOnAccent}" CornerRadius="10"/>
+                    <Button Grid.Column="1" Text="Cancelar" Clicked="OnCancelarCitaFormClicked"
+                            BackgroundColor="{DynamicResource CardBorder}" TextColor="{DynamicResource TextSecondary}" CornerRadius="10"/>
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+
+        <Button Grid.Row="5" Text="+ Nueva cita" Clicked="OnNuevaCitaClicked"
+                BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource TextPrimary}"
+                BorderColor="{DynamicResource CardBorder}" BorderWidth="1"
+                CornerRadius="12" HeightRequest="48" Margin="16,8,16,16"/>
+    </Grid>
+</ContentPage>

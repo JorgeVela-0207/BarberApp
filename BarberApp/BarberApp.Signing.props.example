@@ -1,0 +1,8 @@
+<Project>
+  <!-- Copia este archivo a BarberApp.Signing.props y rellena el thumbprint,
+       o ejecuta scripts/create-msix-cert.ps1 para generarlo automáticamente. -->
+  <PropertyGroup>
+    <AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+    <PackageCertificateThumbprint>PEGAR_THUMBPRINT_AQUI</PackageCertificateThumbprint>
+  </PropertyGroup>
+</Project>

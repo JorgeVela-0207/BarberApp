@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarberApp.Views.DashboardPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
+
+        <BoxView Grid.RowSpan="4" HorizontalOptions="End" VerticalOptions="Start"
+                 WidthRequest="260" HeightRequest="260" Margin="0,-60,-60,0"
+                 Color="{DynamicResource GlowGold}" CornerRadius="130"/>
+
+        <!-- HEADER -->
+        <Grid Grid.Row="0" Padding="20,18,20,8" ColumnDefinitions="*,Auto">
+            <VerticalStackLayout Spacing="2">
+                <HorizontalStackLayout Spacing="8">
+                    <Border BackgroundColor="{DynamicResource AccentGoldSoft}" StrokeThickness="0" Padding="8,4">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="6"/></Border.StrokeShape>
+                        <Label Text="✦" FontSize="14" TextColor="{DynamicResource AccentGold}"/>
+                    </Border>
+                    <Label x:Name="LblNombreNegocio" FontSize="22" FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" LineBreakMode="TailTruncation" MaxLines="1"/>
+                </HorizontalStackLayout>
+                <Label x:Name="LblUsuario" FontSize="13" TextColor="{DynamicResource TextSecondary}" Margin="4,0,0,0"/>
+            </VerticalStackLayout>
+            <HorizontalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" StrokeThickness="1" Padding="10,6">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="20"/></Border.StrokeShape>
+                    <Label x:Name="LblFecha" FontSize="11" TextColor="{DynamicResource TextSecondary}"/>
+                </Border>
+                <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" StrokeThickness="1"
+                        WidthRequest="38" HeightRequest="38">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="19"/></Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAjustesTapped"/>
+                    </Border.GestureRecognizers>
+                    <Label Text="⚙" FontSize="16" TextColor="{DynamicResource AccentGold}"
+                           HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Border>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <!-- LICENCIA -->
+        <Border x:Name="BannerLicencia" Grid.Row="1" IsVisible="False"
+                BackgroundColor="{DynamicResource BannerWarning}" Stroke="{DynamicResource AccentGold}" StrokeThickness="1"
+                Padding="14,10" Margin="20,0,20,6">
+            <Border.StrokeShape><RoundRectangle CornerRadius="10"/></Border.StrokeShape>
+            <Label x:Name="LblAvisoLicencia" TextColor="{DynamicResource AccentGoldStat}" FontSize="12"/>
+        </Border>
+
+        <!-- STATS -->
+        <Border Grid.Row="2" Margin="20,2,20,8" BackgroundColor="{DynamicResource CardBackground}"
+                Stroke="{DynamicResource CardBorder}" StrokeThickness="1" Padding="4,6">
+            <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+            <Grid x:Name="StatsAdmin" ColumnDefinitions="*,*,*" IsVisible="False">
+                <VerticalStackLayout Grid.Column="0" Spacing="2" Padding="6,2">
+                    <Label x:Name="LblPendientesAdmin" Text="0" FontSize="24" FontAttributes="Bold"
+                           TextColor="{DynamicResource AccentGoldStat}" HorizontalOptions="Center"/>
+                    <Label Text="Pendientes" FontSize="10" TextColor="{DynamicResource TextMuted}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <BoxView Grid.Column="0" WidthRequest="1" Color="{DynamicResource CardBorder}" HorizontalOptions="End" Margin="0,6"/>
+                <VerticalStackLayout Grid.Column="1" Spacing="2" Padding="6,2">
+                    <Label x:Name="LblTerminadasAdmin" Text="0" FontSize="24" FontAttributes="Bold"
+                           TextColor="{DynamicResource AccentGreen}" HorizontalOptions="Center"/>
+                    <Label Text="Terminadas" FontSize="10" TextColor="{DynamicResource TextMuted}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <BoxView Grid.Column="1" WidthRequest="1" Color="{DynamicResource CardBorder}" HorizontalOptions="End" Margin="0,6"/>
+                <VerticalStackLayout Grid.Column="2" Spacing="2" Padding="6,2">
+                    <Label x:Name="LblCobradoAdmin" Text="$0" FontSize="24" FontAttributes="Bold"
+                           TextColor="{DynamicResource TextPrimary}" HorizontalOptions="Center"/>
+                    <Label Text="Cobrado hoy" FontSize="10" TextColor="{DynamicResource TextMuted}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Grid>
+            <Grid x:Name="StatsBarbero" ColumnDefinitions="*,*" IsVisible="False">
+                <VerticalStackLayout Grid.Column="0" Spacing="2" Padding="6,2">
+                    <Label x:Name="LblPendientesBarbero" Text="0" FontSize="24" FontAttributes="Bold"
+                           TextColor="{DynamicResource AccentGoldStat}" HorizontalOptions="Center"/>
+                    <Label Text="Pendientes" FontSize="10" TextColor="{DynamicResource TextMuted}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <BoxView Grid.Column="0" WidthRequest="1" Color="{DynamicResource CardBorder}" HorizontalOptions="End" Margin="0,6"/>
+                <VerticalStackLayout Grid.Column="1" Spacing="2" Padding="6,2">
+                    <Label x:Name="LblTerminadasBarbero" Text="0" FontSize="24" FontAttributes="Bold"
+                           TextColor="{DynamicResource AccentGreen}" HorizontalOptions="Center"/>
+                    <Label Text="Terminadas" FontSize="10" TextColor="{DynamicResource TextMuted}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- CUERPO -->
+        <Grid Grid.Row="3" RowDefinitions="Auto,Auto,*" Margin="20,0,20,14" RowSpacing="8">
+
+            <!-- Insight: próxima cita + gráfica -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,*" ColumnSpacing="8" HeightRequest="108">
+                <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" StrokeThickness="1" Padding="12,10">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14"/></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="4">
+                        <HorizontalStackLayout Spacing="6">
+                            <BoxView WidthRequest="3" HeightRequest="12" Color="{DynamicResource AccentGold}" VerticalOptions="Center"/>
+                            <Label Text="Próxima cita" FontSize="10" TextColor="{DynamicResource TextMuted}" FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                        <Label x:Name="LblProximaCita" Text="Sin citas hoy"
+                               TextColor="{DynamicResource TextPrimary}" FontSize="12" LineBreakMode="WordWrap"/>
+                        <Border x:Name="PanelRecordatorio" IsVisible="False"
+                                BackgroundColor="{DynamicResource AccentGreenSoft}" Padding="6,3">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="6"/></Border.StrokeShape>
+                            <Label x:Name="LblRecordatorio" TextColor="{DynamicResource AccentGreen}" FontSize="10"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border x:Name="PanelSemana" Grid.Column="1"
+                        BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" StrokeThickness="1" Padding="10,10">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14"/></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="2">
+                        <HorizontalStackLayout Spacing="6">
+                            <BoxView WidthRequest="3" HeightRequest="12" Color="{DynamicResource AccentLavender}" VerticalOptions="Center"/>
+                            <Label Text="Ingresos 7 días" FontSize="10" TextColor="{DynamicResource TextMuted}" FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                        <FlexLayout x:Name="FlexSemana" HeightRequest="68"
+                                    AlignItems="End" JustifyContent="SpaceBetween"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border x:Name="PanelBarberoInfo" Grid.Column="1" IsVisible="False"
+                        BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" StrokeThickness="1" Padding="12,10">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14"/></Border.StrokeShape>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="4">
+                        <HorizontalStackLayout Spacing="6">
+                            <BoxView WidthRequest="3" HeightRequest="12" Color="{DynamicResource AccentLavender}" VerticalOptions="Center"/>
+                            <Label Text="Tu agenda" FontSize="10" TextColor="{DynamicResource TextMuted}" FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                        <Label Text="Organiza tus citas del día" TextColor="{DynamicResource TextSecondary}" FontSize="11"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Pendientes compactos -->
+            <Border x:Name="PanelPendientes" Grid.Row="1" IsVisible="False"
+                    BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" StrokeThickness="1" Padding="10,8">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12"/></Border.StrokeShape>
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Pendientes de hoy" FontSize="10" TextColor="{DynamicResource TextMuted}" FontAttributes="Bold"/>
+                    <CollectionView x:Name="ListaPendientesRapida" HeightRequest="52">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="Auto,*,Auto" Padding="0,3">
+                                    <Label Text="{Binding Hora}" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold" FontSize="11"/>
+                                    <Label Grid.Column="1" Text="{Binding Cliente}" TextColor="{DynamicResource TextSecondary}" FontSize="11" Margin="6,0,0,0"/>
+                                    <Label Grid.Column="2" Text="{Binding Servicio}" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- NAV ADMIN -->
+            <Grid x:Name="TarjetasAdmin" Grid.Row="2"
+                  RowDefinitions="*,*" ColumnDefinitions="*,*"
+                  ColumnSpacing="8" RowSpacing="8" IsVisible="False">
+
+                <Border Grid.Row="0" Grid.Column="0" BackgroundColor="{DynamicResource CardBackground}"
+                        Stroke="{DynamicResource AccentGold}" StrokeThickness="1" Padding="14">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout VerticalOptions="Fill" Spacing="6">
+                        <Label Text="📅" FontSize="32" HorizontalOptions="Start"/>
+                        <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="1">
+                            <Label Text="Agenda" TextColor="{DynamicResource TextPrimary}" FontSize="15" FontAttributes="Bold"/>
+                            <Label Text="Citas del día" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                    <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnAgendaTapped"/></Border.GestureRecognizers>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" BackgroundColor="{DynamicResource CardBackground}"
+                        Stroke="{DynamicResource AccentGreen}" StrokeThickness="1" Padding="14">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout VerticalOptions="Fill" Spacing="6">
+                        <Label Text="💰" FontSize="32" HorizontalOptions="Start"/>
+                        <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="1">
+                            <Label Text="Caja" TextColor="{DynamicResource TextPrimary}" FontSize="15" FontAttributes="Bold"/>
+                            <Label Text="Cobros e ingresos" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                    <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCajaTapped"/></Border.GestureRecognizers>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" BackgroundColor="{DynamicResource CardBackground}"
+                        Stroke="{DynamicResource AccentLavender}" StrokeThickness="1" Padding="14">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout VerticalOptions="Fill" Spacing="6">
+                        <Label Text="✂️" FontSize="32" HorizontalOptions="Start"/>
+                        <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="1">
+                            <Label Text="Catálogos" TextColor="{DynamicResource TextPrimary}" FontSize="15" FontAttributes="Bold"/>
+                            <Label Text="Servicios y clientes" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                    <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCatalogosTapped"/></Border.GestureRecognizers>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1" BackgroundColor="{DynamicResource CardMuted}"
+                        Stroke="{DynamicResource CardBorder}" StrokeThickness="1" Padding="14">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout VerticalOptions="Fill" Spacing="6">
+                        <Label Text="↩" FontSize="28" TextColor="{DynamicResource TextMuted}" HorizontalOptions="Start"/>
+                        <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="1">
+                            <Label Text="Salir" TextColor="{DynamicResource TextSecondary}" FontSize="15" FontAttributes="Bold"/>
+                            <Label Text="Cerrar sesión" TextColor="{DynamicResource NavMutedText}" FontSize="10"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                    <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnLogoutTapped"/></Border.GestureRecognizers>
+                </Border>
+            </Grid>
+
+            <!-- NAV BARBERO -->
+            <Grid x:Name="TarjetasBarbero" Grid.Row="2"
+                  RowDefinitions="*,Auto" RowSpacing="8" IsVisible="False">
+
+                <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" ColumnSpacing="8" RowSpacing="8">
+                    <Border Grid.Row="0" Grid.Column="0" BackgroundColor="{DynamicResource CardBackground}"
+                            Stroke="{DynamicResource AccentGold}" StrokeThickness="1" Padding="14">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                        <VerticalStackLayout VerticalOptions="Fill" Spacing="6">
+                            <Label Text="📅" FontSize="32"/>
+                            <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="1">
+                                <Label Text="Agenda" TextColor="{DynamicResource TextPrimary}" FontSize="15" FontAttributes="Bold"/>
+                                <Label Text="Mis citas" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnAgendaTapped"/></Border.GestureRecognizers>
+                    </Border>
+                    <Border Grid.Row="0" Grid.Column="1" BackgroundColor="{DynamicResource CardBackground}"
+                            Stroke="{DynamicResource AccentLavender}" StrokeThickness="1" Padding="14">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                        <VerticalStackLayout VerticalOptions="Fill" Spacing="6">
+                            <Label Text="👥" FontSize="32"/>
+                            <VerticalStackLayout VerticalOptions="EndAndExpand" Spacing="1">
+                                <Label Text="Clientes" TextColor="{DynamicResource TextPrimary}" FontSize="15" FontAttributes="Bold"/>
+                                <Label Text="Directorio" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCatalogosTapped"/></Border.GestureRecognizers>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                            BackgroundColor="{DynamicResource CardMuted}" Stroke="{DynamicResource CardBorder}" StrokeThickness="1" Padding="12">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="14"/></Border.StrokeShape>
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                            <Label Text="↩" FontSize="16" TextColor="{DynamicResource TextMuted}" VerticalOptions="Center"/>
+                            <Label Text="Cerrar sesión" TextColor="{DynamicResource TextSecondary}" FontSize="13" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnLogoutTapped"/></Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,18 @@
+# ── NUNCA subir (secretos / generados al compilar) ──
+BarberApp/BarberApp.Signing.props
+certs/
+dist/
+.env
+*.user
+
+# Compilación Visual Studio / .NET
+.vs/
+bin/
+obj/
+
+# Paquetes NuGet locales (si existieran)
+packages/
+
+# Logs y temporales
+*.log
+*.tmp

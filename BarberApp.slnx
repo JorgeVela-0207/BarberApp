@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="BarberApp/BarberApp.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="BarberApp.Core/BarberApp.Core.csproj" />
+  <Project Path="BarberApp.Tests/BarberApp.Tests.csproj" />
+</Solution>

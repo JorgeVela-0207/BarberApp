@@ -1,0 +1,12 @@
+[
+  {
+    "id_negocio": "DEMO001",
+    "nombre_local": "Barbería Demo",
+    "dueno": "Nombre Dueño",
+    "dispositivo_id": "PEGAR_DEVICE_ID_16_CHARS",
+    "token": "BARBER-2026-0001-X7K9M2",
+    "estado": "ACTIVO",
+    "fecha_activacion": "2026-06-19",
+    "fecha_vencimiento": "2027-06-19"
+  }
+]

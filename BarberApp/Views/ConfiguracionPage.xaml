@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarberApp.Views.ConfiguracionPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+
+            <Grid ColumnDefinitions="Auto,*">
+                <Button Text="← Volver" Clicked="OnVolverClicked"
+                        BackgroundColor="Transparent" TextColor="{DynamicResource TextSecondary}" FontSize="14" Padding="0"/>
+                <Label Grid.Column="1" Text="Ajustes"
+                       TextColor="{DynamicResource TextPrimary}" FontSize="20" FontAttributes="Bold"
+                       HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Grid>
+
+            <Label x:Name="LblAvisoRespaldo" IsVisible="False"
+                   TextColor="{DynamicResource AccentGold}" FontSize="12"/>
+
+            <!-- Mi negocio -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Mi negocio" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold"/>
+                    <Entry x:Name="EntryNombre" Placeholder="Nombre del local" TextColor="{DynamicResource TextPrimary}" PlaceholderColor="{DynamicResource TextMuted}"/>
+                    <Entry x:Name="EntryDueno" Placeholder="Dueño / responsable" TextColor="{DynamicResource TextPrimary}" PlaceholderColor="{DynamicResource TextMuted}"/>
+                    <Entry x:Name="EntryTelefono" Placeholder="Teléfono" Keyboard="Telephone" TextColor="{DynamicResource TextPrimary}" PlaceholderColor="{DynamicResource TextMuted}"/>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <TimePicker x:Name="PickerApertura" TextColor="{DynamicResource TextPrimary}"/>
+                        <TimePicker x:Name="PickerCierre" Grid.Column="1" TextColor="{DynamicResource TextPrimary}"/>
+                    </Grid>
+                    <Button Text="Guardar datos" Clicked="OnGuardarNegocioClicked"
+                            BackgroundColor="{DynamicResource AccentGold}" TextColor="{DynamicResource ButtonOnAccent}" CornerRadius="10"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Sucursales -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Sucursales" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold"/>
+                    <Picker x:Name="PickerSucursal" Title="Sucursal activa" TextColor="{DynamicResource TextPrimary}"/>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Entry x:Name="EntryNuevaSucursal" Placeholder="Nueva sucursal" TextColor="{DynamicResource TextPrimary}"/>
+                        <Button Grid.Column="1" Text="Agregar" Clicked="OnAgregarSucursalClicked"
+                                BackgroundColor="{DynamicResource AccentLavender}" TextColor="White" CornerRadius="10"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Seguridad -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Seguridad" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold"/>
+                    <Entry x:Name="EntryPassActual" Placeholder="Contraseña actual" IsPassword="True" TextColor="{DynamicResource TextPrimary}"/>
+                    <Entry x:Name="EntryPassNueva" Placeholder="Nueva contraseña" IsPassword="True" TextColor="{DynamicResource TextPrimary}"/>
+                    <Button Text="Cambiar contraseña admin" Clicked="OnCambiarPasswordClicked"
+                            BackgroundColor="{DynamicResource CardBorder}" TextColor="{DynamicResource TextPrimary}" CornerRadius="10"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Timeout sesión (min)" TextColor="{DynamicResource TextSecondary}" VerticalOptions="Center"/>
+                        <Entry x:Name="EntryTimeout" Grid.Column="1" WidthRequest="60" Keyboard="Numeric" TextColor="{DynamicResource TextPrimary}"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Apariencia -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Tema oscuro" TextColor="{DynamicResource TextSecondary}" VerticalOptions="Center"/>
+                    <Switch x:Name="SwitchTema" Grid.Column="1" Toggled="OnTemaToggled"/>
+                </Grid>
+            </Border>
+
+            <!-- Licencia -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Licencia" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold"/>
+                    <Label x:Name="LblLicenciaInfo" TextColor="{DynamicResource TextSecondary}" FontSize="13"/>
+                    <Label x:Name="LblDeviceId" TextColor="{DynamicResource TextMuted}" FontSize="11"/>
+                    <Button Text="Copiar Device ID" Clicked="OnCopiarDeviceIdClicked"
+                            BackgroundColor="{DynamicResource CardBorder}" TextColor="{DynamicResource TextPrimary}" CornerRadius="10"/>
+                    <Button Text="Verificar / Renovar licencia" Clicked="OnRenovarLicenciaClicked"
+                            BackgroundColor="{DynamicResource AccentGreen}" TextColor="White" CornerRadius="10"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Sincronización -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Sincronización en la nube" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold"/>
+                    <Entry x:Name="EntrySyncUrl" Placeholder="URL API (ej. https://api.midominio.com)" TextColor="{DynamicResource TextPrimary}"/>
+                    <Label x:Name="LblSyncEstado" TextColor="{DynamicResource TextMuted}" FontSize="11"/>
+                    <Button Text="Sincronizar ahora" Clicked="OnSyncClicked"
+                            BackgroundColor="{DynamicResource AccentLavender}" TextColor="White" CornerRadius="10"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Respaldo -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Respaldo de datos" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold"/>
+                    <Button Text="Exportar respaldo JSON" Clicked="OnExportarClicked"
+                            BackgroundColor="{DynamicResource AccentLavender}" TextColor="White" CornerRadius="10"/>
+                    <Button Text="Restaurar desde archivo" Clicked="OnRestaurarClicked"
+                            BackgroundColor="{DynamicResource CardBorder}" TextColor="{DynamicResource TextPrimary}" CornerRadius="10"/>
+                    <Button Text="Copiar base de datos (.db3)" Clicked="OnCopiarDbClicked"
+                            BackgroundColor="{DynamicResource CardBorder}" TextColor="{DynamicResource TextPrimary}" CornerRadius="10"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Auditoría -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Auditoría reciente" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold"/>
+                    <CollectionView x:Name="ListaAuditoria" HeightRequest="160">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="Auto,*" Padding="0,3">
+                                    <Label Text="{Binding Hora}" TextColor="{DynamicResource TextMuted}" FontSize="10" WidthRequest="70"/>
+                                    <Label Grid.Column="1" Text="{Binding Texto}" TextColor="{DynamicResource TextSecondary}" FontSize="11"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Acerca de -->
+            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="16" StrokeShape="RoundRectangle 14">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Acerca de" TextColor="{DynamicResource AccentGold}" FontAttributes="Bold"/>
+                    <Label x:Name="LblVersion" TextColor="{DynamicResource TextMuted}" FontSize="12"/>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

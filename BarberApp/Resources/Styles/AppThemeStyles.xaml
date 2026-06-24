@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Tarjeta principal -->
+    <Style x:Key="AppCard" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource CardBackground}"/>
+        <Setter Property="Stroke" Value="{DynamicResource CardBorder}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 14"/>
+        <Setter Property="Padding" Value="16"/>
+    </Style>
+
+    <!-- Tarjeta de autenticación (Login, Licencia, Registro) -->
+    <Style x:Key="AuthCard" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource CardBackground}"/>
+        <Setter Property="Stroke" Value="{DynamicResource CardBorder}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+        <Setter Property="Padding" Value="36,32"/>
+        <Setter Property="WidthRequest" Value="420"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <!-- Campo de entrada -->
+    <Style x:Key="AppInputBorder" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource InputBackground}"/>
+        <Setter Property="Stroke" Value="{DynamicResource CardBorder}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+        <Setter Property="Padding" Value="12,4"/>
+    </Style>
+
+    <!-- Botón primario dorado -->
+    <Style x:Key="AppPrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource AccentGold}"/>
+        <Setter Property="TextColor" Value="{DynamicResource ButtonOnAccent}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="HeightRequest" Value="50"/>
+    </Style>
+
+    <!-- Botón secundario -->
+    <Style x:Key="AppSecondaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource CardBackground}"/>
+        <Setter Property="TextColor" Value="{DynamicResource TextPrimary}"/>
+        <Setter Property="BorderColor" Value="{DynamicResource CardBorder}"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+
+    <!-- Botón volver -->
+    <Style x:Key="AppBackButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="TextColor" Value="{DynamicResource TextSecondary}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <!-- Título de pantalla -->
+    <Style x:Key="AppPageTitle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource TextPrimary}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <!-- Separador -->
+    <Style x:Key="AppDivider" TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="1"/>
+        <Setter Property="Color" Value="{DynamicResource Divider}"/>
+    </Style>
+
+</ResourceDictionary>

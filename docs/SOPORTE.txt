@@ -1,0 +1,4 @@
+# Datos de soporte — se copian a GUIA_CLIENTE.md al empaquetar
+WhatsApp=+52 868 363 8812
+Correo=Jorgeluisvelatovar@gmail.com
+Horario=Lun-Sab 9:00-18:00

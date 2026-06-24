@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarberApp.Views.LicenciaPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <Grid>
+        <BoxView Color="{DynamicResource GlowGold}" Opacity="0.5"
+                 HorizontalOptions="End" VerticalOptions="Start"
+                 WidthRequest="180" HeightRequest="180" Margin="0,-40,-40,0"/>
+
+        <Border Style="{StaticResource AuthCard}">
+            <VerticalStackLayout Spacing="16">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                    <Label Text="✦" FontSize="20" TextColor="{DynamicResource AccentGold}"/>
+                    <Label Text="🔒" FontSize="40"/>
+                </HorizontalStackLayout>
+
+                <Label Text="Activación de licencia"
+                       TextColor="{DynamicResource TextPrimary}"
+                       FontSize="22" FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+
+                <BoxView Style="{StaticResource AppDivider}"/>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="ID de este dispositivo"
+                           TextColor="{DynamicResource TextMuted}" FontSize="11"
+                           HorizontalOptions="Center"/>
+                    <Label x:Name="LblDeviceId"
+                           TextColor="{DynamicResource TextSecondary}"
+                           FontSize="13" FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+
+                <Button Text="Copiar ID" Clicked="OnCopiarIdClicked"
+                        Style="{StaticResource AppSecondaryButton}" HeightRequest="40"/>
+
+                <BoxView Style="{StaticResource AppDivider}"/>
+
+                <Border Style="{StaticResource AppInputBorder}">
+                    <Entry x:Name="EntryToken"
+                           Placeholder="Ingresa tu token de licencia"
+                           PlaceholderColor="{DynamicResource TextMuted}"
+                           TextColor="{DynamicResource TextPrimary}"
+                           BackgroundColor="Transparent" FontSize="14"/>
+                </Border>
+
+                <Button Text="Activar licencia" Clicked="OnActivarClicked"
+                        Style="{StaticResource AppPrimaryButton}"/>
+
+                <Label Text="¿Cambiaste de PC? Copia el Device ID y envíalo a soporte con tu token para migrar la licencia."
+                       TextColor="{DynamicResource TextMuted}" FontSize="11"
+                       HorizontalTextAlignment="Center" LineBreakMode="WordWrap"/>
+
+                <ActivityIndicator x:Name="IndicatorCarga"
+                                   IsRunning="False" IsVisible="False"
+                                   Color="{DynamicResource AccentGold}"
+                                   HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

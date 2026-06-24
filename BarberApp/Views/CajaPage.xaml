@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarberApp.Views.CajaPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PageBackground}">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+
+        <Grid Grid.Row="0" Padding="16,14" ColumnDefinitions="Auto,*,Auto,Auto,Auto">
+            <Button Text="← Volver" Clicked="OnVolverClicked"
+                    BackgroundColor="Transparent" TextColor="{DynamicResource TextSecondary}" FontSize="14" Padding="0"/>
+            <Label Grid.Column="1" Text="Caja" TextColor="{DynamicResource TextPrimary}" FontSize="20" FontAttributes="Bold"
+                   HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Button Grid.Column="2" Text="CSV" Clicked="OnExportarCsvClicked" FontSize="11" Padding="8,4"
+                    BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource TextSecondary}" CornerRadius="8"/>
+            <Button Grid.Column="3" Text="Excel" Clicked="OnExportarExcelClicked" FontSize="11" Padding="8,4"
+                    BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource AccentGreen}" CornerRadius="8"/>
+            <Button Grid.Column="4" Text="PDF" Clicked="OnExportarPdfClicked" FontSize="11" Padding="8,4"
+                    BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource AccentGold}" CornerRadius="8"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Padding="16,0,16,8" ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
+            <DatePicker x:Name="PickerDesde" TextColor="{DynamicResource TextPrimary}"/>
+            <Label Grid.Column="1" Text="→" TextColor="{DynamicResource TextMuted}" VerticalOptions="Center"/>
+            <DatePicker x:Name="PickerHasta" Grid.Column="2" TextColor="{DynamicResource TextPrimary}"/>
+        </Grid>
+        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="End" Padding="16,0,16,0" Spacing="6" Margin="0,44,0,0">
+            <Button Text="Hoy" Clicked="OnFiltroHoyClicked" FontSize="11" Padding="8,4" BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource TextSecondary}"/>
+            <Button Text="Semana" Clicked="OnFiltroSemanaClicked" FontSize="11" Padding="8,4" BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource TextSecondary}"/>
+            <Button Text="Mes" Clicked="OnFiltroMesClicked" FontSize="11" Padding="8,4" BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource TextSecondary}"/>
+            <Button Text="Aplicar" Clicked="OnAplicarFiltroClicked" FontSize="11" Padding="8,4" BackgroundColor="{DynamicResource AccentGold}" TextColor="{DynamicResource ButtonOnAccent}"/>
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="2" Padding="16,52,16,8">
+            <VerticalStackLayout Spacing="8">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="14,10" StrokeShape="RoundRectangle 12">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="TOTAL PERIODO" TextColor="{DynamicResource TextMuted}" FontSize="11"/>
+                            <Label x:Name="LblTotalPeriodo" Text="$0" TextColor="{DynamicResource AccentGreen}" FontSize="24" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="1" BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="14,10" StrokeShape="RoundRectangle 12">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="PENDIENTES HOY" TextColor="{DynamicResource TextMuted}" FontSize="11"/>
+                            <Label x:Name="LblPendientes" Text="0" TextColor="{DynamicResource AccentGold}" FontSize="24" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+                <Label x:Name="LblComparativa" TextColor="{DynamicResource TextSecondary}" FontSize="11"/>
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <Border BackgroundColor="{DynamicResource InputBackground}" Stroke="{DynamicResource CardBorder}" Padding="10,8" StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Efectivo" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                            <Label x:Name="LblEfectivo" Text="$0" TextColor="{DynamicResource TextPrimary}" FontSize="14" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="1" BackgroundColor="{DynamicResource InputBackground}" Stroke="{DynamicResource CardBorder}" Padding="10,8" StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Tarjeta" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                            <Label x:Name="LblTarjeta" Text="$0" TextColor="{DynamicResource TextPrimary}" FontSize="14" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="2" BackgroundColor="{DynamicResource InputBackground}" Stroke="{DynamicResource CardBorder}" Padding="10,8" StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Transfer." TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                            <Label x:Name="LblTransferencia" Text="$0" TextColor="{DynamicResource TextPrimary}" FontSize="14" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+                <Label Text="Por barbero/estilista" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                <Label x:Name="LblPorBarbero" TextColor="{DynamicResource TextSecondary}" FontSize="11"/>
+                <Label Text="Por servicio" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                <Label x:Name="LblPorServicio" TextColor="{DynamicResource TextSecondary}" FontSize="11"/>
+                <Label Text="Nómina / comisiones" TextColor="{DynamicResource AccentGold}" FontSize="12" FontAttributes="Bold"/>
+                <CollectionView x:Name="ListaComisiones" HeightRequest="100">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,Auto" Padding="0,4">
+                                <VerticalStackLayout Spacing="1">
+                                    <Label Text="{Binding Barbero}" TextColor="{DynamicResource TextPrimary}" FontSize="13" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Detalle}" TextColor="{DynamicResource TextMuted}" FontSize="10"/>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" Text="{Binding ComisionTexto}" TextColor="{DynamicResource AccentGreen}" FontAttributes="Bold"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <ScrollView Grid.Row="3">
+            <VerticalStackLayout Spacing="8" Margin="16,0">
+                <Button Text="+ Cobro walk-in" Clicked="OnWalkInClicked"
+                        BackgroundColor="{DynamicResource CardBackground}" TextColor="{DynamicResource AccentLavender}"
+                        BorderColor="{DynamicResource CardBorder}" BorderWidth="1" CornerRadius="10"/>
+                <Label Text="Citas pendientes de cobro (hoy)" TextColor="{DynamicResource TextSecondary}" FontSize="13"/>
+                <CollectionView x:Name="ListaPendientes" SelectionMode="Single" SelectionChanged="OnCitaPendienteSelected" HeightRequest="120">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BackgroundColor="{DynamicResource CardBackground}" Stroke="{DynamicResource CardBorder}" Padding="14,12" Margin="0,0,0,8" StrokeShape="RoundRectangle 12">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Label Text="{Binding Hora}" TextColor="{DynamicResource AccentLavender}" FontAttributes="Bold" WidthRequest="55"/>
+                                    <VerticalStackLayout Grid.Column="1" Margin="8,0,0,0" Spacing="2">
+                                        <Label Text="{Binding NombreCliente}" TextColor="{DynamicResource TextPrimary}" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Detalle}" TextColor="{DynamicResource TextSecondary}" FontSize="12"/>
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="2" Text="{Binding MontoTexto}" TextColor="{DynamicResource AccentGreen}" FontAttributes="Bold"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Text="Cobros del periodo" TextColor="{DynamicResource TextSecondary}" FontSize="13"/>
+                <CollectionView x:Name="ListaCobros">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,Auto" Padding="4,6">
+                                <VerticalStackLayout Spacing="1">
+                                    <Label Text="{Binding Descripcion}" TextColor="{DynamicResource TextSecondary}" FontSize="13"/>
+                                    <Label Text="{Binding Hora}" TextColor="{DynamicResource TextMuted}" FontSize="11"/>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" Text="{Binding MontoTexto}" TextColor="{DynamicResource TextPrimary}" FontAttributes="Bold"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
